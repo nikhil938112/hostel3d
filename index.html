@@ -4,43 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ashtalakshmi Girls Hostel | Your Home Away From Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* ========== CSS VARIABLES ========== */
+        :root {
+            --navy: #0D1B2A;
+            --slate: #1B2B3E;
+            --slate-mid: #243447;
+            --magenta: #E91E8C;
+            --magenta-light: #F06DC0;
+            --pink-pastel: #FFC2E2;
+            --cyan: #00D4FF;
+            --cyan-soft: #7EECFF;
+            --white: #FFFFFF;
+            --off-white: #F0F4F8;
+            --text-muted: rgba(255,255,255,0.6);
+            --text-dark: #1B2B3E;
+            --glass-bg: rgba(255,255,255,0.06);
+            --glass-border: rgba(255,255,255,0.12);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 32px;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        :root {
-            --primary: #FF6B6B;
-            --secondary: #4ECDC4;
-            --dark: #1A1A2E;
-            --light: #F7F7F7;
-            --accent: #FFE66D;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'DM Sans', sans-serif;
+            background: var(--navy);
+            color: var(--white);
             overflow-x: hidden;
-            background: var(--light);
-            color: var(--dark);
         }
 
-        /* Navigation */
+        /* ========== NAVIGATION ========== */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 1.5rem 5%;
-            background: rgba(26, 26, 46, 0.95);
-            backdrop-filter: blur(10px);
+            padding: 1.2rem 5%;
+            background: rgba(13, 27, 42, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
             z-index: 1000;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
         nav.scrolled {
-            padding: 1rem 5%;
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            padding: 0.9rem 5%;
+            background: rgba(13, 27, 42, 0.95);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.4);
         }
 
         .nav-container {
@@ -52,17 +68,15 @@
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--secondary);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { text-shadow: 0 0 20px rgba(78, 205, 196, 0.5); }
-            50% { text-shadow: 0 0 30px rgba(78, 205, 196, 0.8); }
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--magenta), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.5px;
+            line-height: 1.2;
         }
 
         .nav-links {
@@ -72,9 +86,11 @@
         }
 
         .nav-links a {
-            color: white;
+            color: rgba(255,255,255,0.8);
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
             position: relative;
             transition: color 0.3s;
         }
@@ -82,21 +98,33 @@
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -4px;
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--secondary);
-            transition: width 0.3s ease;
+            background: linear-gradient(90deg, var(--magenta), var(--cyan));
+            border-radius: 2px;
+            transition: width 0.35s ease;
         }
 
-        .nav-links a:hover {
-            color: var(--secondary);
+        .nav-links a:hover { color: var(--white); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-cta {
+            padding: 0.6rem 1.6rem;
+            background: linear-gradient(135deg, var(--magenta), var(--magenta-light));
+            color: white !important;
+            border-radius: 50px;
+            transition: var(--transition) !important;
+            box-shadow: 0 4px 20px rgba(233,30,140,0.35);
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(233,30,140,0.5) !important;
         }
+
+        .nav-cta::after { display: none !important; }
 
         .hamburger {
             display: none;
@@ -106,16 +134,17 @@
         }
 
         .hamburger span {
-            width: 25px;
-            height: 3px;
+            width: 24px;
+            height: 2px;
             background: white;
-            transition: all 0.3s;
+            border-radius: 2px;
+            transition: var(--transition);
         }
 
-        /* Hero Section */
+        /* ========== HERO ========== */
         .hero {
-            height: 100vh;
-            background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+            min-height: 100vh;
+            background: linear-gradient(150deg, #0D1B2A 0%, #1B1033 50%, #0A2240 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -123,64 +152,191 @@
             overflow: hidden;
         }
 
+        /* Mesh gradient blobs */
+        .hero-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
+        .blob-1 {
+            width: 600px; height: 600px;
+            background: var(--magenta);
+            top: -200px; left: -150px;
+            animation: blobFloat 8s ease-in-out infinite;
+        }
+
+        .blob-2 {
+            width: 500px; height: 500px;
+            background: var(--cyan);
+            bottom: -150px; right: -100px;
+            animation: blobFloat 10s ease-in-out infinite reverse;
+        }
+
+        .blob-3 {
+            width: 300px; height: 300px;
+            background: #7C3AED;
+            top: 40%; left: 40%;
+            animation: blobFloat 6s ease-in-out infinite 2s;
+        }
+
+        @keyframes blobFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.05); }
+        }
+
+        /* Grid overlay */
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* Floating cubes */
+        .floating-cube {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            pointer-events: none;
+        }
+
+        .cube-1 { top: 18%; left: 8%; animation: floatCube 7s ease-in-out infinite; }
+        .cube-2 { top: 55%; right: 10%; animation: floatCube 9s ease-in-out infinite 1.5s; }
+        .cube-3 { bottom: 18%; left: 18%; animation: floatCube 8s ease-in-out infinite 3s; }
+
+        @keyframes floatCube {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(180deg); }
+        }
+
+        .cube { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; animation: rotateCube 12s linear infinite; }
+
+        @keyframes rotateCube {
+            from { transform: rotateX(0deg) rotateY(0deg); }
+            to { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 1px solid rgba(233,30,140,0.5);
+            background: rgba(233,30,140,0.08);
+            backdrop-filter: blur(3px);
+        }
+
+        .cube-face.front  { transform: translateZ(40px); }
+        .cube-face.back   { transform: rotateY(180deg) translateZ(40px); }
+        .cube-face.right  { transform: rotateY(90deg) translateZ(40px); }
+        .cube-face.left   { transform: rotateY(-90deg) translateZ(40px); }
+        .cube-face.top    { transform: rotateX(90deg) translateZ(40px); }
+        .cube-face.bottom { transform: rotateX(-90deg) translateZ(40px); }
+
+        .cube-2 .cube-face {
+            border-color: rgba(0,212,255,0.5);
+            background: rgba(0,212,255,0.06);
+        }
+
         .hero-content {
             text-align: center;
-            color: white;
             z-index: 2;
             padding: 2rem;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.4rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--cyan-soft);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.8rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-badge span { 
+            width: 6px; height: 6px; 
+            background: var(--magenta); 
+            border-radius: 50%; 
+            animation: pulse-dot 1.5s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
         }
 
         .hero h1 {
-            font-size: 4.5rem;
-            margin-bottom: 1rem;
-            animation: slideDown 1s ease;
-            background: linear-gradient(45deg, var(--secondary), var(--accent));
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 6vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 30%, var(--pink-pastel) 60%, var(--cyan-soft) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            animation: slideUp 1s ease;
-            opacity: 0.9;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+            font-weight: 300;
+            letter-spacing: 0.3px;
         }
 
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .hero-phone {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--cyan-soft) !important;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            transition: var(--transition);
         }
 
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .hero-phone:hover { color: var(--cyan) !important; letter-spacing: 0.5px; }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .cta-button {
-            display: inline-block;
-            padding: 1.2rem 3rem;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 1rem 2.8rem;
+            background: linear-gradient(135deg, var(--magenta) 0%, #C2185B 100%);
             color: white;
             text-decoration: none;
             border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            transition: all 0.4s ease;
-            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
-            animation: pulse 2s infinite;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            transition: var(--transition);
+            box-shadow: 0 8px 30px rgba(233,30,140,0.4);
             position: relative;
             overflow: hidden;
         }
@@ -188,118 +344,133 @@
         .cta-button::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.3);
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
             transition: left 0.5s;
         }
 
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
+        .cta-button:hover::before { left: 100%; }
         .cta-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 45px rgba(233,30,140,0.55);
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
+        .cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 1rem 2.8rem;
+            background: var(--glass-bg);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
         }
 
-        /* 3D Floating Elements */
-        .floating-cube {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            animation: float 6s ease-in-out infinite;
+        .cta-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--cyan);
+            transform: translateY(-3px);
+            color: var(--cyan-soft);
         }
 
-        .cube-1 { top: 20%; left: 10%; animation-delay: 0s; }
-        .cube-2 { top: 60%; right: 15%; animation-delay: 2s; }
-        .cube-3 { bottom: 20%; left: 20%; animation-delay: 4s; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
-            50% { transform: translateY(-30px) rotateX(180deg) rotateY(180deg); }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 4rem;
+            flex-wrap: wrap;
         }
 
-        .cube {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            animation: rotate 10s linear infinite;
+        .stat {
+            text-align: center;
         }
 
-        @keyframes rotate {
-            from { transform: rotateX(0deg) rotateY(0deg); }
-            to { transform: rotateX(360deg) rotateY(360deg); }
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--magenta), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .cube-face {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background: rgba(78, 205, 196, 0.3);
-            border: 2px solid var(--secondary);
-            backdrop-filter: blur(5px);
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.3rem;
         }
 
-        .cube-face.front  { transform: translateZ(50px); }
-        .cube-face.back   { transform: rotateY(180deg) translateZ(50px); }
-        .cube-face.right  { transform: rotateY(90deg) translateZ(50px); }
-        .cube-face.left   { transform: rotateY(-90deg) translateZ(50px); }
-        .cube-face.top    { transform: rotateX(90deg) translateZ(50px); }
-        .cube-face.bottom { transform: rotateX(-90deg) translateZ(50px); }
+        /* ========== SECTIONS COMMON ========== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
 
-        /* Features Section */
-        .features {
-            padding: 8rem 5%;
-            background: var(--light);
+        .section-tag {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            background: linear-gradient(135deg, rgba(233,30,140,0.15), rgba(0,212,255,0.15));
+            border: 1px solid rgba(233,30,140,0.3);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--magenta-light);
+            margin-bottom: 1rem;
         }
 
         .section-title {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 4rem;
-            color: var(--dark);
-            position: relative;
-            display: inline-block;
-            left: 10%;
-            transform: translateX(-50%);
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 2px;
+        .title-line {
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--magenta), var(--cyan));
+            border-radius: 3px;
+            margin: 0 auto;
         }
+
+        /* ========== FEATURES ========== */
+        .features {
+            padding: 7rem 5%;
+            background: var(--off-white);
+        }
+
+        .features .section-title { color: var(--text-dark); }
+        .features .section-tag { color: var(--magenta); }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
             max-width: 1400px;
             margin: 0 auto;
         }
 
         .feature-card {
             background: white;
-            padding: 3rem 2rem;
-            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            border-radius: var(--radius-md);
             text-align: center;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(233,30,140,0.08);
             position: relative;
             overflow: hidden;
         }
@@ -307,88 +478,97 @@
         .feature-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            opacity: 0;
-            transition: opacity 0.5s;
-            z-index: 0;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--magenta), var(--cyan));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
         }
 
-        .feature-card:hover::before {
-            opacity: 0.1;
-        }
+        .feature-card:hover::before { transform: scaleX(1); }
 
         .feature-card:hover {
-            transform: translateY(-20px) rotateX(5deg);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            transform: translateY(-12px);
+            box-shadow: 0 20px 50px rgba(233,30,140,0.15);
+            border-color: rgba(233,30,140,0.2);
         }
 
-        .feature-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            display: inline-block;
-            transition: all 0.5s;
-            position: relative;
-            z-index: 1;
+        .feature-icon-wrap {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, rgba(233,30,140,0.1), rgba(0,212,255,0.1));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            border: 1px solid rgba(233,30,140,0.15);
+            transition: var(--transition);
         }
 
-        .feature-card:hover .feature-icon {
-            transform: rotateY(360deg) scale(1.2);
+        .feature-card:hover .feature-icon-wrap {
+            background: linear-gradient(135deg, rgba(233,30,140,0.2), rgba(0,212,255,0.2));
+            transform: scale(1.1) rotate(5deg);
         }
 
         .feature-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-            position: relative;
-            z-index: 1;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 0.8rem;
         }
 
         .feature-card p {
-            color: #666;
-            line-height: 1.6;
-            position: relative;
-            z-index: 1;
+            color: #6B7A8D;
+            font-size: 0.95rem;
+            line-height: 1.7;
         }
 
-        /* Rooms Section */
+        /* ========== ROOMS ========== */
         .rooms {
-            padding: 8rem 5%;
-            background: linear-gradient(135deg, #a0c5ce 0%, #f3f3f4 100%);
-            color: white;
+            padding: 7rem 5%;
+            background: linear-gradient(150deg, var(--navy) 0%, var(--slate) 100%);
+            position: relative;
+            overflow: hidden;
         }
 
-        .rooms-slider {
-            max-width: 1400px;
-            margin: 0 auto;
+        .rooms::before {
+            content: '';
+            position: absolute;
+            top: -200px; right: -200px;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .rooms-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-            perspective: 1000px;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
         .room-card {
-            background: rgba(227, 9, 9, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-md);
             overflow: hidden;
-            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transform-style: preserve-3d;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
         }
 
         .room-card:hover {
-            transform: translateY(-20px) rotateY(5deg);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            border-color: rgba(233,30,140,0.3);
         }
 
         .room-image {
-            width: 100%;
-            height: 250px;
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            height: 200px;
+            background: linear-gradient(135deg, rgba(233,30,140,0.3), rgba(0,212,255,0.2));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -397,20 +577,11 @@
             overflow: hidden;
         }
 
-        .room-image::before {
+        .room-image::after {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 60%, rgba(13,27,42,0.6));
         }
 
         .room-content {
@@ -418,85 +589,118 @@
         }
 
         .room-content h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--secondary);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 0.7rem;
         }
 
         .room-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
             margin-bottom: 1.5rem;
-            opacity: 0.9;
-            line-height: 1.6;
+        }
+
+        .room-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
         }
 
         .price {
-            font-size: 2rem;
-            color: rgb(14, 2, 2);
-            font-weight: bold;
-            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--magenta), var(--magenta-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
+        .price span { font-size: 0.85rem; color: var(--text-muted); font-family: 'DM Sans', sans-serif; font-weight: 400; }
+
         .book-button {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background: var(--secondary);
-            color: var(--dark);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.8rem;
+            background: linear-gradient(135deg, var(--cyan), #00A8CC);
+            color: var(--navy);
             text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            transition: all 0.3s;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: var(--transition);
         }
 
         .book-button:hover {
-            background: var(--accent);
             transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,212,255,0.4);
         }
 
-        /* Testimonials */
+        /* ========== TESTIMONIALS ========== */
         .testimonials {
-            padding: 8rem 5%;
-            background: var(--light);
+            padding: 7rem 5%;
+            background: var(--off-white);
         }
+
+        .testimonials .section-title { color: var(--text-dark); }
+        .testimonials .section-tag { color: var(--magenta); }
 
         .testimonial-grid {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
+            gap: 2rem;
         }
 
         .testimonial-card {
             background: white;
-            padding: 3rem 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            border: 1px solid rgba(233,30,140,0.08);
             position: relative;
-            transition: all 0.5s;
-            transform-style: preserve-3d;
+            transition: var(--transition);
+            overflow: hidden;
         }
 
         .testimonial-card::before {
             content: '"';
             position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 6rem;
-            color: var(--secondary);
-            opacity: 0.2;
+            top: -10px; left: 20px;
+            font-size: 8rem;
+            background: linear-gradient(135deg, var(--magenta), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0.12;
             font-family: Georgia, serif;
+            line-height: 1;
         }
 
         .testimonial-card:hover {
-            transform: translateY(-10px) rotateX(5deg);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(233,30,140,0.12);
+            border-color: rgba(233,30,140,0.2);
         }
 
+        .stars {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 1.2rem;
+        }
+
+        .stars span { color: var(--magenta); font-size: 1rem; }
+
         .testimonial-text {
-            font-style: italic;
-            margin-bottom: 2rem;
             color: #555;
             line-height: 1.8;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
             position: relative;
             z-index: 1;
         }
@@ -508,231 +712,346 @@
         }
 
         .author-avatar {
-            width: 50px;
-            height: 50px;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--magenta), var(--cyan));
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            flex-shrink: 0;
         }
 
-        .author-info h4 {
-            color: var(--dark);
-            margin-bottom: 0.3rem;
-        }
+        .author-info h4 { color: var(--text-dark); font-size: 0.95rem; font-weight: 600; }
+        .author-info p { color: #999; font-size: 0.82rem; margin-top: 2px; }
 
-        .author-info p {
-            color: #999;
-            font-size: 0.9rem;
-        }
-
-        /* Contact Section */
+        /* ========== CONTACT ========== */
         .contact {
-            padding: 8rem 5%;
-            background: linear-gradient(135deg, #1A1A2E 0%, #f1f2f4 100%);
-            color: white;
+            padding: 7rem 5%;
+            background: linear-gradient(150deg, var(--slate) 0%, var(--navy) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            bottom: -200px; left: -200px;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(233,30,140,0.08) 0%, transparent 70%);
+            pointer-events: none;
         }
 
         .contact-container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 4rem;
+            align-items: start;
         }
 
         .contact-info h3 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: var(--secondary);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--white);
+            margin-bottom: 2rem;
         }
 
         .contact-item {
             display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            transition: all 0.3s;
+            align-items: flex-start;
+            gap: 1.2rem;
+            margin-bottom: 1.8rem;
+            transition: var(--transition);
+            padding: 1.2rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid transparent;
         }
 
         .contact-item:hover {
-            transform: translateX(10px);
+            background: var(--glass-bg);
+            border-color: var(--glass-border);
+            transform: translateX(8px);
         }
 
         .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--secondary);
-            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(233,30,140,0.2), rgba(0,212,255,0.2));
+            border: 1px solid rgba(233,30,140,0.3);
+            border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            color: var(--dark);
+            font-size: 1.3rem;
+            flex-shrink: 0;
         }
 
+        .contact-item h4 {
+            color: var(--cyan-soft);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+        }
+
+        .contact-item p, .contact-item a {
+            color: rgba(255,255,255,0.75);
+            font-size: 0.95rem;
+            text-decoration: none;
+            line-height: 1.6;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover { color: var(--magenta-light); }
+
         .contact-form {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
+            background: var(--glass-bg);
+            padding: 2.5rem;
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .contact-form h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 1.8rem;
+            color: var(--white);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
         }
 
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
-            padding: 1rem;
-            border: none;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1);
+            padding: 0.9rem 1.1rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-sm);
+            background: rgba(255,255,255,0.05);
             color: white;
-            font-size: 1rem;
-            transition: all 0.3s;
+            font-size: 0.95rem;
+            font-family: 'DM Sans', sans-serif;
+            transition: var(--transition);
+            outline: none;
         }
 
         .form-group input::placeholder,
         .form-group textarea::placeholder {
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255,255,255,0.3);
         }
 
         .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: rgba(233,30,140,0.5);
+            background: rgba(233,30,140,0.05);
+            box-shadow: 0 0 0 3px rgba(233,30,140,0.1);
         }
+
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .form-group select option { background: var(--slate); color: white; }
 
         .submit-button {
             width: 100%;
             padding: 1rem;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--magenta), #C2185B);
             color: white;
             border: none;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: bold;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'DM Sans', sans-serif;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transition);
+            letter-spacing: 0.3px;
+            position: relative;
+            overflow: hidden;
         }
 
+        .submit-button::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .submit-button:hover::before { left: 100%; }
         .submit-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(233,30,140,0.5);
         }
 
-        /* Footer */
+        /* ========== FOOTER ========== */
         footer {
-            background: #0D0D1E;
-            color: white;
+            background: #060D15;
+            color: rgba(255,255,255,0.6);
+            padding: 2.5rem 5%;
             text-align: center;
-            padding: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.06);
         }
 
-        .social-links {
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--magenta), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
             display: flex;
             justify-content: center;
             gap: 2rem;
             margin-bottom: 1.5rem;
+            flex-wrap: wrap;
         }
 
-        .social-links a {
-            width: 50px;
-            height: 50px;
-            background: rgba(78, 205, 196, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--secondary);
+        .footer-links a {
+            color: rgba(255,255,255,0.5);
             text-decoration: none;
-            font-size: 1.5rem;
-            transition: all 0.3s;
+            font-size: 0.9rem;
+            transition: color 0.3s;
         }
 
-        .social-links a:hover {
-            background: var(--secondary);
-            color: var(--dark);
-            transform: translateY(-5px) rotate(360deg);
+        .footer-links a:hover { color: var(--magenta-light); }
+
+        footer p {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.35);
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
+        footer p a { color: var(--magenta-light); text-decoration: none; }
 
-            .nav-links {
-                position: fixed;
-                top: 80px;
-                right: -100%;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background: rgba(26, 26, 46, 0.98);
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                transition: right 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .features-grid,
-            .rooms-slider,
-            .testimonial-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Scroll Animations */
+        /* ========== SCROLL REVEAL ========== */
         .scroll-reveal {
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         .scroll-reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
+
+        .scroll-reveal:nth-child(2) { transition-delay: 0.1s; }
+        .scroll-reveal:nth-child(3) { transition-delay: 0.2s; }
+        .scroll-reveal:nth-child(4) { transition-delay: 0.3s; }
+        .scroll-reveal:nth-child(5) { transition-delay: 0.1s; }
+        .scroll-reveal:nth-child(6) { transition-delay: 0.2s; }
+        .scroll-reveal:nth-child(7) { transition-delay: 0.3s; }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 900px) {
+            .contact-container { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+
+            .nav-links {
+                position: fixed;
+                top: 72px; right: -100%;
+                width: 100%;
+                height: calc(100vh - 72px);
+                background: rgba(13, 27, 42, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            }
+
+            .nav-links.active { right: 0; }
+            .nav-links a { font-size: 1.2rem; }
+
+            .hero-stats { gap: 2rem; }
+            .rooms-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .cta-group { flex-direction: column; align-items: center; }
+            .hero-stats { gap: 1.5rem; }
+        }
+
+        /* ========== WHATSAPP FLOAT ========== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            text-decoration: none;
+            z-index: 999;
+            box-shadow: 0 8px 30px rgba(37,211,102,0.4);
+            transition: var(--transition);
+            animation: waBounce 3s ease-in-out infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 40px rgba(37,211,102,0.6);
+        }
+
+        @keyframes waBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
     </style>
 </head>
 <body>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/919666676954?text=Hello%20I%20am%20interested%20in%20Hostel%20admission.%20Please%20share%20more%20details." target="_blank" class="whatsapp-float" title="Chat on WhatsApp">💬</a>
+
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
-            <div class="logo">ASTALAKSHMI GIRLS HOSTEL</div>
+            <div class="logo">Ashtalakshmi<br>Girls Hostel</div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#features">Features</a></li>
+                <li><a href="#features">Amenities</a></li>
                 <li><a href="#rooms">Rooms</a></li>
                 <li><a href="#testimonials">Reviews</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact" class="nav-cta">Book Now</a></li>
             </ul>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -742,167 +1061,191 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero" id="home">
-        <!-- 3D Floating Cubes -->
+        <div class="hero-blob blob-1"></div>
+        <div class="hero-blob blob-2"></div>
+        <div class="hero-blob blob-3"></div>
+        <div class="hero-grid"></div>
+
         <div class="floating-cube cube-1">
             <div class="cube">
-                <div class="cube-face front"></div>
-                <div class="cube-face back"></div>
-                <div class="cube-face right"></div>
-                <div class="cube-face left"></div>
-                <div class="cube-face top"></div>
-                <div class="cube-face bottom"></div>
+                <div class="cube-face front"></div><div class="cube-face back"></div>
+                <div class="cube-face right"></div><div class="cube-face left"></div>
+                <div class="cube-face top"></div><div class="cube-face bottom"></div>
             </div>
         </div>
         <div class="floating-cube cube-2">
             <div class="cube">
-                <div class="cube-face front"></div>
-                <div class="cube-face back"></div>
-                <div class="cube-face right"></div>
-                <div class="cube-face left"></div>
-                <div class="cube-face top"></div>
-                <div class="cube-face bottom"></div>
+                <div class="cube-face front"></div><div class="cube-face back"></div>
+                <div class="cube-face right"></div><div class="cube-face left"></div>
+                <div class="cube-face top"></div><div class="cube-face bottom"></div>
             </div>
         </div>
         <div class="floating-cube cube-3">
             <div class="cube">
-                <div class="cube-face front"></div>
-                <div class="cube-face back"></div>
-                <div class="cube-face right"></div>
-                <div class="cube-face left"></div>
-                <div class="cube-face top"></div>
-                <div class="cube-face bottom"></div>
+                <div class="cube-face front"></div><div class="cube-face back"></div>
+                <div class="cube-face right"></div><div class="cube-face left"></div>
+                <div class="cube-face top"></div><div class="cube-face bottom"></div>
             </div>
         </div>
 
         <div class="hero-content">
-            <h1>Your Home Away From Home</h1>
-            <p>Experience Comfort, Community, and Independence <br> 📞 <a href="tel:+919666676954" style="color:white">+91 9666676954</a></p>
-            <a href="#contact" class="cta-button">Book Your Stay</a>
+            <div class="hero-badge"><span></span> Vanasthalipuram's Safest Girls Hostel</div>
+            <h1>Your Home<br>Away From Home</h1>
+            <p>Experience Comfort, Community &amp; Independence</p>
+            <a href="tel:+919666676954" class="hero-phone">📞 +91 9666676954</a>
+            <div class="cta-group">
+                <a href="#contact" class="cta-button">✨ Book Your Stay</a>
+                <a href="#features" class="cta-secondary">Explore Amenities →</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Security</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Happy Residents</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">4.9★</div>
+                    <div class="stat-label">Rating</div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Features Section -->
+    <!-- Features -->
     <section class="features" id="features">
-        <h2 class="section-title scroll-reveal">Why Choose Us</h2>
+        <div class="section-header">
+            <div class="section-tag">Why Choose Us</div>
+            <h2 class="section-title scroll-reveal">Everything You Need,<br>Under One Roof</h2>
+            <div class="title-line" style="margin-top:1rem;"></div>
+        </div>
         <div class="features-grid">
             <div class="feature-card scroll-reveal">
-                <div class="feature-icon">🏠</div>
+                <div class="feature-icon-wrap">🏠</div>
                 <h3>Modern Facilities</h3>
-                <p>Enjoy state-of-the-art amenities including high-speed WiFi, comfortable beds, and 24/7 hot water.</p>
+                <p>High-speed WiFi, comfortable beds, and 24/7 hot water — everything you need to feel at home.</p>
             </div>
             <div class="feature-card scroll-reveal">
-                <div class="feature-icon">🌍</div>
+                <div class="feature-icon-wrap">📍</div>
                 <h3>Prime Location</h3>
-                <p>Located in the heart of the city with easy access to major attractions, transport, and nightlife.</p>
+                <p>Heart of Vanasthalipuram with easy access to transport, colleges, offices, and daily essentials.</p>
             </div>
             <div class="feature-card scroll-reveal">
-                <div class="feature-icon">👥</div>
+                <div class="feature-icon-wrap">👥</div>
                 <h3>Social Community</h3>
-                <p>Meet people from different locations and make lifelong friendships.</p>
+                <p>Meet working women and students from across the city. Build friendships that last a lifetime.</p>
             </div>
             <div class="feature-card scroll-reveal">
-                <div class="feature-icon">🔒</div>
-                <h3>Safe & Secure</h3>
-                <p>24/7 security and CCTV monitoring</p>
+                <div class="feature-icon-wrap">🔒</div>
+                <h3>Safe &amp; Secure</h3>
+                <p>24/7 CCTV surveillance, secure entry, and dedicated caretaker — your safety is our priority.</p>
             </div>
-           
             <div class="feature-card scroll-reveal">
-                <div class="feature-icon">✨</div>
-                <h3>Clean & Cozy</h3>
-                <p>Spotlessly clean rooms with regular housekeeping. Your comfort is our priority.</p>
+                <div class="feature-icon-wrap">✨</div>
+                <h3>Clean &amp; Cozy</h3>
+                <p>Spotlessly maintained rooms with regular housekeeping. Your comfort drives everything we do.</p>
             </div>
-
-             <div class="feature-card scroll-reveal">
-                <div class="feature-icon">🧺🧼👕</div>
-                <h3>Washing</h3>
-                <p>Enjoy hassle-free living with on-site washing machines available for all residents.</p>
+            <div class="feature-card scroll-reveal">
+                <div class="feature-icon-wrap">🧺</div>
+                <h3>Laundry Facility</h3>
+                <p>On-site washing machines available for all residents — hassle-free everyday living.</p>
             </div>
-
-             <div class="feature-card scroll-reveal">
-                <div class="feature-icon">🏆</div>
-                <h3>Popular</h3>
-                <p>The Safest Corner in Vanasthalipuram, at the Most Honest Price.</p>
+            <div class="feature-card scroll-reveal">
+                <div class="feature-icon-wrap">🏆</div>
+                <h3>Most Trusted</h3>
+                <p>The safest corner in Vanasthalipuram at the most honest price. Trusted by hundreds of girls.</p>
             </div>
-            
         </div>
-        
     </section>
 
-    <!-- Rooms Section -->
+    <!-- Rooms -->
     <section class="rooms" id="rooms">
-        <h2 class="section-title scroll-reveal">Our Accommodations</h2>
-        <div class="rooms-slider">
+        <div class="section-header">
+            <div class="section-tag">Accommodations</div>
+            <h2 class="section-title scroll-reveal">Choose Your Space</h2>
+            <div class="title-line" style="margin-top:1rem;"></div>
+        </div>
+        <div class="rooms-grid">
             <div class="room-card scroll-reveal">
                 <div class="room-image">🛏️</div>
                 <div class="room-content">
-                    <h3>Shared Dormitory</h3>
-                    <p>Perfect for group of friends, equipped with 4 bed dorms</p>
-                    <div class="price">₹4500/Month</div>
-                    <a href="#contact" class="book-button">Book Now</a>
+                    <h3>4-Bed Shared Dormitory</h3>
+                    <p>Ideal for groups of friends — spacious 4-bed dorm with shared amenities, great community, and maximum fun.</p>
+                    <div class="room-footer">
+                        <div class="price">₹4,500 <span>/ month</span></div>
+                        <a href="#contact" class="book-button">Book Now →</a>
+                    </div>
                 </div>
             </div>
             <div class="room-card scroll-reveal">
                 <div class="room-image">🚪</div>
                 <div class="room-content">
-                    <h3>Shared Dormitory</h3>
-                    <p>Perfect for individuals,students and employees, equipped with 3 bed dorms</p>
-                    <div class="price">₹4500/Month</div>
-                    <a href="#contact" class="book-button">Book Now</a>
+                    <h3>3-Bed Shared Dormitory</h3>
+                    <p>Perfect for students and working professionals — cozy 3-bed dorm with the right balance of privacy and community.</p>
+                    <div class="room-footer">
+                        <div class="price">₹4,500 <span>/ month</span></div>
+                        <a href="#contact" class="book-button">Book Now →</a>
+                    </div>
                 </div>
-            </div>
-            
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
+    <!-- Testimonials -->
     <section class="testimonials" id="testimonials">
-        <h2 class="section-title scroll-reveal">What people Say</h2>
+        <div class="section-header">
+            <div class="section-tag">Reviews</div>
+            <h2 class="section-title scroll-reveal">What Our Residents Say</h2>
+            <div class="title-line" style="margin-top:1rem;"></div>
+        </div>
         <div class="testimonial-grid">
             <div class="testimonial-card scroll-reveal">
-                <p class="testimonial-text">
-                    "Best hostel experience ever! The staff was incredibly friendly, the facilities were clean, and I made friends from all over the locations. Highly recommended for working women and students."
-                </p>
+                <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                <p class="testimonial-text">"Best hostel experience ever! The staff was incredibly friendly, facilities were clean, and I made friends from all over. Highly recommended for working women and students."</p>
                 <div class="testimonial-author">
                     <div class="author-avatar">S</div>
                     <div class="author-info">
-                        <h4></h4>
-                        <p></p>
+                        <h4>Sneha R.</h4>
+                        <p>IT Professional</p>
                     </div>
                 </div>
             </div>
             <div class="testimonial-card scroll-reveal">
-                <p class="testimonial-text">
-                    "Perfect location, amazing vibe, and great value for money. The common areas are perfect for socializing. I extended my stay twice!"
-                </p>
+                <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                <p class="testimonial-text">"Perfect location, amazing vibe, and great value for money. The common areas are wonderful for socializing. I extended my stay twice because I loved it so much!"</p>
                 <div class="testimonial-author">
                     <div class="author-avatar">D</div>
                     <div class="author-info">
-                        <h4></h4>
-                        <p></p>
+                        <h4>Divya M.</h4>
+                        <p>College Student</p>
                     </div>
                 </div>
             </div>
             <div class="testimonial-card scroll-reveal">
-                <p class="testimonial-text">
-                    "Clean, safe, and super social!. I felt at home from day one.Accessible for everything in the city. Will definitely be back!"
-                </p>
+                <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                <p class="testimonial-text">"Clean, safe, and super social! I felt at home from day one. Everything in the city is accessible. The management is very caring and responsive. Will definitely be back!"</p>
                 <div class="testimonial-author">
                     <div class="author-avatar">L</div>
                     <div class="author-info">
-                        <h4></h4>
-                        <p></p>
+                        <h4>Lakshmi P.</h4>
+                        <p>Working Professional</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact -->
     <section class="contact" id="contact">
-        <h2 class="section-title scroll-reveal">Get In Touch</h2>
+        <div class="section-header">
+            <div class="section-tag">Get In Touch</div>
+            <h2 class="section-title scroll-reveal">Ready to Book Your Stay?</h2>
+            <div class="title-line" style="margin-top:1rem;"></div>
+        </div>
         <div class="contact-container">
             <div class="contact-info scroll-reveal">
                 <h3>Contact Information</h3>
@@ -910,50 +1253,75 @@
                     <div class="contact-icon">📍</div>
                     <div>
                         <h4>Address</h4>
-                        <p><a href="https://maps.app.goo.gl/RPGs6L1RpzmDUyrz9" style="color: white;">Sharadha eye care backside Vanasthalihills,road no 5 Prashantinagar, <br>Vanasthalipuram-500070</a></p>
+                        <a href="https://maps.app.goo.gl/RPGs6L1RpzmDUyrz9" target="_blank">Sharadha Eye Care Backside,<br>Vanasthalihills Road No.5,<br>Prashantinagar, Vanasthalipuram – 500070</a>
                     </div>
                 </div>
                 <div class="contact-item">
                     <div class="contact-icon">📞</div>
                     <div>
                         <h4>Phone</h4>
-                        <p><a href="tel:+919666676954" style="color:white;">+91 9666676954</a><br><a href="tel:+918187827474" style="color:white;">+91 81878 27474</a></p>
+                        <p>
+                            <a href="tel:+919666676954">+91 9666676954</a><br>
+                            <a href="tel:+918187827474">+91 81878 27474</a>
+                        </p>
                     </div>
                 </div>
-
-                 <div class="contact-item">
-    <div class="contact-icon">💬</div>
-    <div>
-        <h4>Whatsapp</h4>
-        <p>
-            <a href="https://wa.me/919666676954?text=Hello%20I%20am%20interested%20in%20Hostel%20admission.%20Please%20share%20more%20details." 
-               target="_blank" 
-               style="color:white">
-               Chat with us
-            </a>
-        </p>
-    </div>
-</div>
-
-                
+                <div class="contact-item">
+                    <div class="contact-icon">💬</div>
+                    <div>
+                        <h4>WhatsApp</h4>
+                        <p><a href="https://wa.me/919666676954?text=Hello%20I%20am%20interested%20in%20Hostel%20admission.%20Please%20share%20more%20details." target="_blank">Chat with us on WhatsApp</a></p>
+                    </div>
+                </div>
                 <div class="contact-item">
                     <div class="contact-icon">🕐</div>
                     <div>
                         <h4>Check-in</h4>
-                        <p>24/7 Available</p>
+                        <p>24/7 Available — Welcome anytime!</p>
                     </div>
                 </div>
             </div>
 
+            <div class="contact-form scroll-reveal">
+                <h3>Send an Enquiry</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" placeholder="Full name">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" placeholder="+91 XXXXX XXXXX">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Room Type</label>
+                    <select>
+                        <option value="">Select preferred room</option>
+                        <option value="4bed">4-Bed Shared Dormitory</option>
+                        <option value="3bed">3-Bed Shared Dormitory</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea placeholder="Tell us your move-in date, any questions..."></textarea>
+                </div>
+                <button class="submit-button" onclick="handleSubmit(event)">💬 Send via WhatsApp</button>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <div class="social-links">
-            
+        <div class="footer-logo">Ashtalakshmi Girls Hostel</div>
+        <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#features">Amenities</a>
+            <a href="#rooms">Rooms</a>
+            <a href="#testimonials">Reviews</a>
+            <a href="#contact">Contact</a>
         </div>
-        <p>&copy; All rights reserved. | Designed with ❤️ for Guests | Don't forget to visit us</p>
+        <p>&copy; 2025 Ashtalakshmi Girls Hostel. All rights reserved. | Designed with ❤️ for our residents | <a href="tel:+919666676954">+91 9666676954</a></p>
     </footer>
 
     <script>
@@ -965,75 +1333,85 @@
             navLinks.classList.toggle('active');
         });
 
-        // Close menu when clicking on a link
         document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
+            link.addEventListener('click', () => navLinks.classList.remove('active'));
         });
 
-        // Navbar scroll effect
+        // Navbar scroll
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
         });
 
-        // Smooth scrolling
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
+            anchor.addEventListener('click', function(e) {
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
 
-        // Scroll reveal animation
-        const revealElements = document.querySelectorAll('.scroll-reveal');
-        
-        const revealOnScroll = () => {
-            const windowHeight = window.innerHeight;
-            revealElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const revealPoint = 150;
-                
-                if (elementTop < windowHeight - revealPoint) {
-                    element.classList.add('active');
+        // Scroll reveal
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
                 }
             });
-        };
+        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
-        window.addEventListener('scroll', revealOnScroll);
-        revealOnScroll(); // Initial check
+        document.querySelectorAll('.scroll-reveal').forEach(el => revealObserver.observe(el));
 
-        // Form submission
-        document.querySelector('.contact-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your inquiry! We will get back to you soon.');
-            e.target.reset();
-        });
-
-        // Add parallax effect to floating cubes
+        // Mouse parallax on cubes
         document.addEventListener('mousemove', (e) => {
-            const cubes = document.querySelectorAll('.floating-cube');
-            const mouseX = e.clientX / window.innerWidth;
-            const mouseY = e.clientY / window.innerHeight;
-            
-            cubes.forEach((cube, index) => {
-                const speed = (index + 1) * 20;
-                const x = (mouseX - 0.5) * speed;
-                const y = (mouseY - 0.5) * speed;
-                cube.style.transform = `translate(${x}px, ${y}px)`;
+            const mx = (e.clientX / window.innerWidth - 0.5);
+            const my = (e.clientY / window.innerHeight - 0.5);
+            document.querySelectorAll('.floating-cube').forEach((cube, i) => {
+                const speed = (i + 1) * 18;
+                cube.style.transform = `translate(${mx * speed}px, ${my * speed}px)`;
             });
         });
+
+        // Form submit → WhatsApp
+        function handleSubmit(e) {
+            e.preventDefault();
+
+            const name    = document.querySelector('input[placeholder="Full name"]').value.trim();
+            const phone   = document.querySelector('input[placeholder="+91 XXXXX XXXXX"]').value.trim();
+            const room    = document.querySelector('select').value;
+            const message = document.querySelector('textarea').value.trim();
+
+            if (!name || !phone) {
+                alert('Please enter your name and phone number before submitting.');
+                return;
+            }
+
+            const roomLabel = room === '4bed' ? '4-Bed Shared Dormitory'
+                            : room === '3bed' ? '3-Bed Shared Dormitory'
+                            : 'Not specified';
+
+            const text = encodeURIComponent(
+                `🏠 *New Hostel Enquiry*\n\n` +
+                `👤 *Name:* ${name}\n` +
+                `📞 *Phone:* ${phone}\n` +
+                `🛏️ *Room Type:* ${roomLabel}\n` +
+                `💬 *Message:* ${message || 'No message provided'}`
+            );
+
+            // Visual feedback
+            const btn = e.target;
+            btn.textContent = '✅ Redirecting to WhatsApp...';
+            btn.style.background = 'linear-gradient(135deg, #25D366, #128C7E)';
+
+            setTimeout(() => {
+                window.open(`https://wa.me/919666676954?text=${text}`, '_blank');
+                btn.textContent = 'Send Enquiry ✨';
+                btn.style.background = '';
+            }, 800);
+        }
     </script>
 </body>
 </html>
